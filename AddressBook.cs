@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace TryCatch
@@ -8,7 +9,15 @@ namespace TryCatch
 
     public void AddContact(Contact contactObj)
     {
-      _contactList[contactObj.Email] = contactObj;
+      try
+      {
+        _contactList.Add(contactObj.Email, contactObj);
+        Console.WriteLine($"{contactObj.Email} has been added to the contact list.");
+      }
+      catch (ArgumentException ex)
+      {
+        Console.WriteLine($"Couldn't Add {contactObj.Email} to the list. It has already been added to the list previously.");
+      }
     }
 
     public Contact GetByEmail(string email)
