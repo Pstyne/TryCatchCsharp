@@ -5,13 +5,13 @@ namespace TryCatch
   class Program
   {
       /*
-          1. Add the required classes to make the following code compile.
+      *    1. Add the required classes to make the following code compile.
           
 
-          2. Run the program and observe the exception.
+      *    2. Run the program and observe the exception.
 
-          3. Add try/catch blocks in the appropriate locations to prevent the program from crashing
-              Print meaningful error messages in the catch blocks.
+      *    3. Add try/catch blocks in the appropriate locations to prevent the program from crashing
+      *        Print meaningful error messages in the catch blocks.
       */
 
       static void Main(string[] args)
@@ -58,11 +58,19 @@ namespace TryCatch
           //  Search the AddressBook by email and print the information about each Contact
           foreach (string email in emails)
           {
-              Contact contact = addressBook.GetByEmail(email);
-              Console.WriteLine("----------------------------");
-              Console.WriteLine($"Name: {contact.FullName}");
-              Console.WriteLine($"Email: {contact.Email}");
-              Console.WriteLine($"Address: {contact.Address}");
+              try
+              {
+                  Contact contact = addressBook.GetByEmail(email);
+                  Console.WriteLine("----------------------------");
+                  Console.WriteLine($"Name: {contact.FullName}");
+                  Console.WriteLine($"Email: {contact.Email}");
+                  Console.WriteLine($"Address: {contact.Address}");
+              }
+              catch (KeyNotFoundException ex)
+              {
+                  Console.WriteLine("----------------------------");
+                  Console.WriteLine($"{email} was not found in the system");
+              }
           }
       }
   }
